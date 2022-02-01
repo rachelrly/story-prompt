@@ -14,4 +14,6 @@ Write a command line application in any language that accepts a json string of k
 
 Write a second command line application that sends to STDOUT statistics about the stored records, including the maximum and minimum values for numerical inputs, the most common responses for string inputs, and anything else you think might be relevant.
 
-Instructions for installing and running your applications should be added to this README file.
+## Instructions
+
+In the current directory, run `bash ./story.sh` (or `chmod +x story.sh && ./story.sh` to run with executable).
