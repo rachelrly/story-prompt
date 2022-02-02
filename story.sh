@@ -1,15 +1,21 @@
 #!/bin/bash
 
+# Colors
 BLUE='\033[1;34m'
 CYAN='\033[0;36m'
 RED='\033[1;31m'
 NC='\033[0m' # No color
 
+# Variables in global scope
 NUMBER=0
 UNIT=''
 PLACE=''
 ADJ=''
 NOUN=''
+
+# Regex
+number='^[0-9]+$'
+string=''
 
 
 function main {
@@ -19,22 +25,16 @@ function main {
     input_number
 }
 
-# function is_exit_input {
-# # read -s -N 1 -t 1 key
-#     if [[ $1 == q ]] ; then
-#         echo -e "${RED}Ending story generator."
-#         exit 0
-#     fi
-# }
-
 function create_story {
-    # TODO: Write to file
-    echo -e "\nHere is your story: \n${CYAN}One day Anna was walking her $NUMBER $UNIT commute to $PLACE and found a $ADJ $NOUN on the ground.${NC}"
+    story="One day Anna was walking her $NUMBER $UNIT commute to $PLACE and found a $ADJ $NOUN on the ground."
+    path="./data/stories.txt"
+    echo -e "\nHere is your story: \n${CYAN}${story}${NC}"
+    echo $story >> $path
+    echo "Story saved in $path"
 }
 
 function input_number {
-    number='^[0-9]+$'
-    read -p "Enter a number: " NUMBER_INPUT    
+    read -p "Enter a number: " NUMBER_INPUT   
     if ! [[ $NUMBER_INPUT =~ $number ]] ; then
         echo -e "${RED}Error: $NUMBER_INPUT is not a valid number$NC\n"
         input_number
@@ -47,7 +47,7 @@ function input_number {
 function input_unit_measurement { 
     # only support commutable units
     read -p "Enter a unit of distance: " UNIT_INPUT
-    if ! [[ $UNIT_INPUT =~ "mile" ]] ; then
+    if [[ $UNIT_INPUT -ge 10 ]] ; then
         echo -e "${RED}Error: $UNIT_INPUT is not a valid unit of distance$NC"
         echo -e "Try entering 'mile'"
         input_unit_measurement
@@ -59,9 +59,8 @@ function input_unit_measurement {
 }
 
 function input_place {
-    read -e -p "Enter a place: " PLACE_INPUT
-    # DO BASIC STRING VALIDATIOn
-    if ! [[ $PLACE_INPUT =~ "test" ]] ; then
+    read -p "Enter a place: " PLACE_INPUT
+    if [[ $PLACE_INPUT -ge 10 ]] ; then
         echo -e "${RED}Error: $PLACE_INPUT is not a place$NC"
         echo -e "Please enter only alphabetical characters"
         input_place
@@ -72,9 +71,8 @@ function input_place {
 }
 
 function input_adj {
-    read -e -p "Enter an adjective: " ADJ_INPUT
-    # DO BASIC STRING VALIDATIOn
-    if ! [[ $ADJ_INPUT =~ "test" ]] ; then
+    read -p "Enter an adjective: " ADJ_INPUT
+    if [[ $ADJ_INPUT -ge 10 ]] ; then
         echo -e "${RED}Error: $ADJ_INPUT is not an adjective$NC"
         echo -e "Please enter only alphabetical characters"
         input_adj
@@ -85,9 +83,8 @@ function input_adj {
 }
 
 function input_noun {
-    read -e -p "Enter a noun: " NOUN_INPUT
-    # DO BASIC STRING VALIDATIOn
-    if ! [[ $NOUN_INPUT =~ "test" ]] ; then
+    read -p "Enter a noun: " NOUN_INPUT
+    if [[ $NOUN_INPUT -ge 10 ]] ; then
         echo -e "${RED}Error: $NOUN_INPUT is not a noun$NC"
         echo -e "Please enter only alphabetical characters"
         input_noun
