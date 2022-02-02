@@ -16,4 +16,6 @@ Write a second command line application that sends to STDOUT statistics about th
 
 ## Instructions
 
-In the current directory, run `bash story.sh` in the terminal and follow the prompts.
+### Create Story
+
+In the root dir, run `bash story.sh` in the terminal and follow the text prompts. You will be asked to enter input after each prompt. Input validation is handled with each prompt. The final story is printed to the console and stored in `/data/stories.txt`.
