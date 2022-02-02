@@ -45,7 +45,6 @@ function input_number {
 }
 
 function input_unit_measurement { 
-    # only support commutable units
     read -p "Enter a unit of distance: " UNIT_INPUT
     if [[ $UNIT_INPUT -ge 10 ]] ; then
         echo -e "${RED}Error: $UNIT_INPUT is not a valid unit of distance$NC"
